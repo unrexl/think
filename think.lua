@@ -76,9 +76,8 @@ function C4RLLib:IsRunning()
 end
 
 local function AddConnection(Signal, Function)
-	if (not C4RLLib:IsRunning()) then
-		return
-	end
+	-- XENO FIX: Removed IsRunning check - it was blocking all connections
+	-- Direct connection always works
 	local SignalConnect = Signal:Connect(Function)
 	table.insert(C4RLLib.Connections, SignalConnect)
 	return SignalConnect
