@@ -68,12 +68,11 @@ else
 end
 
 function C4RLLib:IsRunning()
-	if gethui then
-		return C4RL.Parent == gethui()
-	else
-		return C4RL.Parent == game:GetService("CoreGui")
-	end
-
+	-- Fixed: Check actual parent instead of assuming based on gethui existence
+	local coreGui = game:GetService("CoreGui")
+	local hudGui = gethui and gethui()
+	
+	return C4RL.Parent == coreGui or C4RL.Parent == hudGui
 end
 
 local function AddConnection(Signal, Function)
